@@ -29,7 +29,10 @@ int main()
 
         computerNumber = rand() % (max - min + 1) + min;
 
-        cout << "Компьютер загадал такое число: " << computerNumber << ". Оно больше, меньше или равно загаданному числу?" << endl;
+        cout << "Компьютер загадал такое число: " 
+          << computerNumber 
+          << ". Оно больше, меньше или равно загаданному числу?" 
+          << endl;
 
         cout << "Ваш ответ: ";
         cin >> user_conceive;
