@@ -3,12 +3,13 @@
 #include <ctime>
 
 /*
-    если число 0 - ошибка
-    если число больше 50 - ошибка
-    если число = 1 - минимальное значение
-    если число = 50 - максимальное значение
-
-    if ((max != 0 && min != 0) && (max < 50 && min < 50))
+    если компьютер предлагает 1 - подтвердить правильность, конец программы.  
+    если пользователь отвечает - "маленькое" - ошибка
+    каждое следующее предложенное число должно быть меньше предыдущего.
+    пользователь отвечает - "большое" - число уменьшается
+    пользователь отвечает - "маленькое" - число увеличивается
+    если компьютер предлагает 50 - подтвердить правильность, конец программы.
+    если пользователь отвечает - "большое" - ошибка
 */
 
 using namespace std;
@@ -23,6 +24,9 @@ int main()
     int tries = 0;
     int min = 1;
     int max = 50;
+    const int limit_max_Number = 51;
+    const int limit_min_Number = 0;
+    srand(static_cast<unsigned int>(time(0)));
 
     cout << "Добро пожаловать в нашу игру! Вы загадываете число в уме от 1 до 50, а компьютер его отгадывает"
         "\nВы будете писать " << SMALL << ", " << BIG << " или " << CORRECT << " после каждого числа, выведенного компьютером: \n"
@@ -30,7 +34,13 @@ int main()
        
     do
     {
-       if ((max > 0 && min > 0) && (max < 51 && min < 51))
+
+       if (!(max > limit_min_Number && min > limit_min_Number) 
+       && (max < limit_max_Number && min < limit_max_Number))
+       {
+           cout << "Ошибка! Загаданное число не может быть 0 или больше 50!" << endl;
+           return 0;
+       }
        {
            tries++;
            computerNumber = rand() % (max - min + 1) + min;  
@@ -47,13 +57,13 @@ int main()
            if (user_conceive == SMALL)
            {
                cout << "Число слишком маленькое" << endl;
-               max = computerNumber - 1;
+               min = computerNumber - 1;
            }
 
            else if (user_conceive == BIG)
            {
                cout << "Число слишком большое" << endl;
-               min = computerNumber + 1;
+               max = computerNumber + 1;
 
            }
            else if (user_conceive == CORRECT)
@@ -62,10 +72,6 @@ int main()
                    " и на это ушло " << tries << " попыток" << endl;
                return 1;
            }
-           else if (user_conceive == CORRECT)
-           {
-
-           }
            else
            {
                cout << "Ошибка! Неверно введённое число!" << endl;
@@ -73,11 +79,6 @@ int main()
            }
        
        } 
-       else
-       {
-           cout << "Ошибка! Загаданное число не может быть 0 или больше 50!" << endl;
-           return 0;
-       }
        
     }   while (user_conceive != CORRECT); 
 }
