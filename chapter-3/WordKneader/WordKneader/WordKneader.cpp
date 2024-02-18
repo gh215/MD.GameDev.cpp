@@ -11,6 +11,22 @@ using namespace std;
     3. Если угадал с несколькими подсказками - также количество, равное длине слова минус 3
     4. Если не угадал - его спрашивают до тех пор, пока он не нажал quit
     */
+
+string permute(string jumble)
+{
+    int length = jumble.size();
+
+    for (int i = 0; i < length; ++i)
+    {
+        int index1 = (rand() % length);
+        int index2 = (rand() % length);
+        char temp = jumble[index1];
+        jumble[index1] = jumble[index2];
+        jumble[index2] = temp;
+    }
+    return jumble;
+}
+
 int main()
 {
     setlocale(0, "Russian");
@@ -34,16 +50,7 @@ int main()
     string jumble = theWord;
     int length = jumble.size();
 
-        for (int i = 0; i < length; ++i)
-        {
-            int index1 = (rand() % length);
-            int index2 = (rand() % length);
-            char temp = jumble[index1];
-            jumble[index1] = jumble[index2];
-            jumble[index2] = temp;
-        }
-
-
+    jumble = permute(jumble);
     const int scoreHint = 3;
     int score_used_hint = 0;
     int score_not_used_hint = 0;
