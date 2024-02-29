@@ -48,12 +48,10 @@ int main()
     string theHint = WORDS[choice][HINT];
     int score = 0;
     string jumble = theWord;
-    int length = jumble.size();
 
     jumble = permute(jumble);
     const int scoreHint = 3;
     int score_used_hint = 0;
-    int score_not_used_hint = 0;
     bool usedHint = false;
 
     cout << "\t\t Добро пожаловть в игру 'Словомеска'!\n\n";
@@ -88,10 +86,9 @@ int main()
         
         cout << "Да, всё верно!";
         int score = theWord.length();
-        const int penalty = 3;
         if (usedHint)
         {
-            score -= penalty;
+            score -= scoreHint;
         }
         cout << "Ваш текущий результат очков = " << score << endl;
     }
