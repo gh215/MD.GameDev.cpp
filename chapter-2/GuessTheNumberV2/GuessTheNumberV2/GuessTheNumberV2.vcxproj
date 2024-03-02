@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="gtn.cpp" />
+    <ClCompile Include="funcs.cpp" />
     <ClCompile Include="GuessTheNumberV2.cpp" />
   </ItemGroup>
   <ItemGroup>

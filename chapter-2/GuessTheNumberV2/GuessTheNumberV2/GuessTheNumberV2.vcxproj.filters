@@ -18,7 +18,7 @@
     <ClCompile Include="GuessTheNumberV2.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="gtn.cpp">
+    <ClCompile Include="funcs.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
