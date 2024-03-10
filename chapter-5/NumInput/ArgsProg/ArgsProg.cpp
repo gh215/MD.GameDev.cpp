@@ -45,12 +45,15 @@ int getNumberFromUser(string prompt = "Введите число: ")
     return num;
 }
 
-int getNumberFromUser(string prompt, string dataType) 
+int getNumberFromUser2(string);
+
+int getNumberFromUser2()
 {
-    if (prompt.empty()) 
-    {
-        prompt = "Введите " + dataType + ": ";
-    }
+    return getNumberFromUser2("Введите число: ");
+}
+
+int getNumberFromUser2(string prompt) 
+{
     int num;
     cout << prompt;
     cin >> num;
@@ -60,15 +63,9 @@ int getNumberFromUser(string prompt, string dataType)
 int main() 
 {
     setlocale(0, "Russian");
-
-    int num1 = getNumberFromUser();
-    cout << "Вы ввели: " << num1 << std::endl;
-
-    int num2 = getNumberFromUser("Введите ваш возраст: ");
-    cout << "Вы ввели: " << num2 << std::endl;
-
-    int num3 = getNumberFromUser("", "integer");
-    cout << "Вы ввели: " << num3 << std::endl;
-
+    getNumberFromUser();
+    getNumberFromUser("Hello there! ");
+    getNumberFromUser2();
+    getNumberFromUser2("Hello there! ");
     return 0;
 }
