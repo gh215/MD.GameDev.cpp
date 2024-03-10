@@ -8,116 +8,172 @@ using namespace std;
 
 /*
 Псевдокод
-
-	Функция game_start
+	Функция rn_seed_gen()
 	{
-		Заносим слова в вектор
-		Устанавливаем генератор случайного посева чисел
-		Перемешиваем слова
-	}
-	Функция get_user_var
-	{
-		Если игрок еще не превысил лимит ошибок, но и не разгадал это слово
-			Сообщить игроку, сколько ошибок он еще имеет право допустить
-			Показать игроку буквы, которые он уже угадал
-			Показать игроку, какую часть загаданного слова он уже открыл
-			Получить от игрока следующий вариант буквы
-		Если игрок предложит букву, которую он уже угадал
-			Получить вариант игрока
-			Добавить новый вариант в множество использованных букв
-		Если предложенная буква присутствует в загаданном слове
-			Сообщить пользователю, что эта догадка верная
-			Добавить в уже имеющийся фрагмент слова угаданную букву
-		Иначе
-			Сообщить игроку, что предложенный им вариант неверен
-			Увеличить на единицу количество ошибочных вариантов, предложенных игроком
+		Запускает повсев случайных чисел
 	}
 
-	Функция game_end
+	Функция get_words()
 	{
-		Если игрок допустил слишком много ошибок
-			Сообщить игроку, что он повешен
-		Иначе
-			Поздравить игрока с разгадкой секретного слова
+		Создать вектор 
+		Заности слова в вектор 
+		Перемешивает порядок слов в векторе
+		Вернуть вектор		
+	}
+
+	Функция get_init_soFar(слово)
+	{
+		Создать строку, состоящую из "-" длинной, равной длинне слова
+		Вернуть строку
+	}
+
+	Функция display_game_stat(soFar, использованные_буквы, количество_ошибок)
+	{
+		Вывести количество оставшихся попыток
+		Вывести использованные буквы
+		Вывести текущее состояние угадываемого слова
+	}
+
+	Функция get_user_var(использованные_буквы)
+	{
+		Получить ввод от пользователя
+		Преобразовать букву в верхний регистр
+		Пока введенная буква уже использовалась:
+			сообщить пользователю, что эта буква уже использовалась
+			получить ввод буквы от пользователя
+			преобразовать букву в верхний регистр
+		Вернуть введенную букву
+	}
+
+	Функция get_upd_SoFar(слово, soFar, буква)
+	{
+		Создать новую строку newSoFar, копию soFar
+		Сля каждого символа в слове:
+			Если символ совпадает с буквой:
+				заменить соответствующий символ в newSoFar на букву
+		Вернуть newSoFar
+	}
+
+	Функция game_start(слово)
+	{
+		Инициализировать soFar вызовом get_init_soFar(слово)
+		Инициализировать использованные_буквы пустой строкой
+		Инициализировать количество_ошибок нулем
+		Пока количество_ошибок меньше MAX_WRONG и soFar не равна слову:
+			вывести состояние игры вызовом display_game_stat
+			получить букву от пользователя вызовом get_user_var
+			добавить букву в использованные_буквы
+			Если буква присутствует в слове:
+				сообщить, что буква верная
+				обновить soFar вызовом get_upd_SoFar
+			Иначе:
+				сообщить, что буква неверная
+				увеличить количество_ошибок
+		Если количество_ошибок равно MAX_WRONG:
+			вывести сообщение о проигрыше
+		Иначе:
+			вывести сообщение о выигрыше
+		Вывести загаданное слово
 	}
 */
 
-
-
-const int МАХ_WRONG = 8;
-vector<string>words;
-int wrong = 0;
-string soFar;
-string used = "";
-
-void game_start()
+void rn_seed_gen()
 {
+	srand(static_cast<unsigned int>(time(0)));
+}
+const int МАХ_WRONG = 8;
+
+vector<string> get_words()
+{
+	vector<string>words;
 	words.push_back("GUESS");
 	words.push_back("HANGMAN");
 	words.push_back("DIFFICULT");
-	srand(static_cast<unsigned int>(time(0)));
 	random_shuffle(words.begin(), words.end());
+	rn_seed_gen();
+	return words;
 }
-void get_user_var(string THE_WORD)
-{
-	while ((wrong < МАХ_WRONG) && (soFar != THE_WORD))
-	{
-		cout << "\nУ вас осталось " << (МАХ_WRONG - wrong) << " попыток";
-		cout << "\nВы использовали следующие буквы: " << used;
-		cout << "\nСлово: " << soFar << endl;
 
-		char guess;
+string get_init_soFar(string word)
+{
+	return string(word.size(), '-');
+}
+
+void display_game_stat(string soFar, string used, int wrong)
+{
+	cout << "\nУ вас осталось " << (МАХ_WRONG - wrong) << " попыток";
+	cout << "\nВы использовали следующие буквы: " << used;
+	cout << "\nСлово: " << soFar << endl;
+}
+
+char get_user_var(string used)
+{
+	char guess;
+	cout << "\nВаш выбор: ";
+	cin >> guess;
+	guess = toupper(guess);
+
+	while (used.find(guess) != string::npos)
+	{
+		cout << "\nВы уже использовали " << guess << endl;
 		cout << "\nВаш выбор: ";
 		cin >> guess;
 		guess = toupper(guess);
+	}
+	return guess;
+}
 
-		while (used.find(guess) != string::npos)
+string get_upd_SoFar(string word, string soFar, char guess) {
+	string newSoFar = soFar;
+	for (int i = 0; i < word.length(); ++i) 
+	{
+		if (word[i] == guess) 
 		{
-			cout << "\nВы уже использовали " << guess << endl;
-			cout << "\nВаш выбор: ";
-			cin >> guess;
-			guess = toupper(guess);
+			newSoFar[i] = guess;
 		}
+	}
+	return newSoFar;
+}
+
+void game_start(string word)
+{
+	string soFar = get_init_soFar(word);
+	string used = "";
+	int wrongCount = 0;
+
+	while (wrongCount < МАХ_WRONG && soFar != word) 
+	{
+		display_game_stat(soFar, used, wrongCount);
+		char guess = get_user_var(used);
 		used += guess;
-		if (THE_WORD.find(guess) != string::npos)
-		{
+
+		if (word.find(guess) != string::npos) {
 			cout << "\nЭто так! " << guess << " - это правильная буква.";
-			for (int i = 0; i < THE_WORD.length(); ++i)
-			{
-				if (THE_WORD[i] == guess)
-				{
-					soFar[i] = guess;
-				}
-			}
+			soFar = get_upd_SoFar(word, soFar, guess);
 		}
-		else
+		else 
 		{
 			cout << "\nИзвините, " << guess << " это неправильная буква.";
-			++wrong;
+			++wrongCount;
 		}
 	}
-}
-string game_end(string THE_WORD)
-{
-	if (wrong == МАХ_WRONG)
-	{
+
+	if (wrongCount == МАХ_WRONG) {
 		cout << "\nВас повесили!" << endl;
 	}
-	else
-	{
+	else {
 		cout << "\nВы угадали!" << endl;
 	}
-	cout << "\nСлово, которое было загадано: " << THE_WORD << endl;
-	return THE_WORD;
+
+	cout << "Слово, которое было загадано: " << word << endl;
 }
 
 int main()
 {
 	setlocale(0, "Russian");
-	game_start();
-	const string THE_WORD = words[0];
-	soFar = string(THE_WORD.size(), '-');
+	vector<string> words = get_words();
+	string THE_WORD = words[0];
 	cout << "\nДобро пожаловать в игру 'Виселица'! Удачи!" << endl;
-	get_user_var(THE_WORD);
-	game_end(THE_WORD);
+	game_start(THE_WORD);
+	return 0;
 }
