@@ -83,15 +83,15 @@ void rn_seed_gen()
 }
 const int МАХ_WRONG = 8;
 
-vector<string> get_words()
+string get_word()
 {
 	vector<string>words;
 	words.push_back("GUESS");
 	words.push_back("HANGMAN");
 	words.push_back("DIFFICULT");
-	random_shuffle(words.begin(), words.end());
 	rn_seed_gen();
-	return words;
+	random_shuffle(words.begin(), words.end());
+	return words[0];
 }
 
 string get_init_soFar(string word)
@@ -171,8 +171,7 @@ void game_start(string word)
 int main()
 {
 	setlocale(0, "Russian");
-	vector<string> words = get_words();
-	string THE_WORD = words[0];
+	string THE_WORD = get_word();
 	cout << "\nДобро пожаловать в игру 'Виселица'! Удачи!" << endl;
 	game_start(THE_WORD);
 	return 0;
