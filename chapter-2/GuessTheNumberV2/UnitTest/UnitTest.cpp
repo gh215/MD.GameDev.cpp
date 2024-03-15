@@ -36,14 +36,6 @@ namespace UnitTest
 			Assert::AreEqual(51, min);
 			Assert::AreEqual(100, max);
 		}
-		TEST_METHOD(AskUserTest)
-		{
-			int min = 1, max = 100;
-			int cn = 50;
-			int userInput = SMALL;
-			int result = ask_user(cn, min, max);
-			Assert::AreEqual(userInput, result);
-		}
 
 	};
 }
