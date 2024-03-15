@@ -1,11 +1,4 @@
-﻿#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <ctime>
-#include <cctype>
-using namespace std;
-
+﻿#include "hang.h"
 /*
 Псевдокод
 	Функция rn_seed_gen()
@@ -81,7 +74,6 @@ void rn_seed_gen()
 {
 	srand(static_cast<unsigned int>(time(0)));
 }
-const int МАХ_WRONG = 8;
 
 string get_word()
 {
@@ -123,11 +115,12 @@ char get_user_var(string used)
 	return guess;
 }
 
-string get_upd_SoFar(string word, string soFar, char guess) {
+string get_upd_SoFar(string word, string soFar, char guess) 
+{
 	string newSoFar = soFar;
-	for (int i = 0; i < word.length(); ++i) 
+	for (unsigned int i = 0; i < word.length(); ++i)
 	{
-		if (word[i] == guess) 
+		if (word[i] == guess)
 		{
 			newSoFar[i] = guess;
 		}
@@ -141,7 +134,7 @@ void game_start(string word)
 	string used = "";
 	int wrongCount = 0;
 
-	while (wrongCount < МАХ_WRONG && soFar != word) 
+	while (wrongCount < МАХ_WRONG && soFar != word)
 	{
 		display_game_stat(soFar, used, wrongCount);
 		char guess = get_user_var(used);
@@ -151,7 +144,7 @@ void game_start(string word)
 			cout << "\nЭто так! " << guess << " - это правильная буква.";
 			soFar = get_upd_SoFar(word, soFar, guess);
 		}
-		else 
+		else
 		{
 			cout << "\nИзвините, " << guess << " это неправильная буква.";
 			++wrongCount;
@@ -166,13 +159,4 @@ void game_start(string word)
 	}
 
 	cout << "Слово, которое было загадано: " << word << endl;
-}
-
-int main()
-{
-	setlocale(0, "Russian");
-	string THE_WORD = get_word();
-	cout << "\nДобро пожаловать в игру 'Виселица'! Удачи!" << endl;
-	game_start(THE_WORD);
-	return 0;
 }
