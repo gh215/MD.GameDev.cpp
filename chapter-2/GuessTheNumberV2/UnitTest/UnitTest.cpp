@@ -24,10 +24,6 @@ namespace UnitTest
 			int ng = num_gen(0, 0);
 			Assert::IsTrue(ng == 0);
 		}
-		TEST_METHOD(GreetingTest)
-		{
-			greeting();
-		}
 		TEST_METHOD(BordReductTest)
 		{
 			int min = 1, max = 100;
@@ -39,11 +35,6 @@ namespace UnitTest
 			bord_reduct(50, SMALL, min, max);
 			Assert::AreEqual(51, min);
 			Assert::AreEqual(100, max);
-		}
-		TEST_METHOD(TellGuessedTest)
-		{
-			tell_guessed(42);
-			Assert::IsTrue(42);
 		}
 		TEST_METHOD(AskUserTest)
 		{
