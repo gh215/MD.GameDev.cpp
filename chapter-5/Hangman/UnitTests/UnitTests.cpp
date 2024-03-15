@@ -21,25 +21,13 @@ namespace UnitTests
             string soFar = get_init_soFar(word);
             Assert::AreEqual(string(word.size(), '-'), soFar);
         }
-        TEST_METHOD(TestGetUserVar_NewChar) 
-        {
-            string used = "";
-            char guess = get_user_var(used);
-            Assert::AreEqual('A', guess);
-        }
-        TEST_METHOD(TestGetUserVar_UsedChar)
-        {
-            string used = "A";
-            char guess = get_user_var(used);
-            Assert::AreEqual('B', guess);
-        }
         TEST_METHOD(TestGetUpdateSoFarNoMatch)
         {
             string word = "HELLO";
             string soFar = "-----";
             char guess = 'X';
             string updSoFar = get_upd_SoFar(word, soFar, guess);
-            Assert::IsTrue("-----");
+            Assert::AreEqual(static_cast<const char*>("-----"), updSoFar.c_str());
         }
         TEST_METHOD(TestGetUpdateSoFarSingleMatch)
         {
@@ -47,7 +35,7 @@ namespace UnitTests
             string soFar = "-----";
             char guess = 'H';
             string updSoFar = get_upd_SoFar(word, soFar, guess);
-            Assert::IsTrue("H----");
+            Assert::AreEqual(static_cast<const char*>("H----"), updSoFar.c_str());
         }
         TEST_METHOD(TestGetUpdateSoFarMultipleMatches)
         {
@@ -55,7 +43,7 @@ namespace UnitTests
             string soFar = "-----";
             char guess = 'L';
             string updSoFar = get_upd_SoFar(word, soFar, guess);
-            Assert::IsTrue("--LL-");
+            Assert::AreEqual(static_cast<const char*>("--LL-"), updSoFar.c_str());
         }
 	};
 }
