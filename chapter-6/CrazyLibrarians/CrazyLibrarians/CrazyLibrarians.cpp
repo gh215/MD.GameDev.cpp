@@ -7,11 +7,23 @@ string askText(const char* prompt)
 	{
 		cout << prompt;
 		cin >> text;
-		if (!text.empty())
+		bool isValid = true;
+		for (char c : text) 
+		{
+			if (!isalpha(c)) 
+			{
+				isValid = false;
+				break;
+			}
+		}
+
+		if (isValid) 
 		{
 			break;
 		}
-		cout << "The entered value is empty. Please try again.\n";
+		cout << "The entered value is not a letter. Please try again.\n";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	} 
 	return text;
 }
@@ -39,19 +51,19 @@ int askNumber(const char* prompt)
 
 void tellStory(string& name, string& noun, int number, string& bodyPart, string& verb)
 {
-	cout << "\nHere's your story:\n";
+	cout << "\nHere's your story:\n\n";
 	cout << "The famous explorer ";
 	cout << name;
-	cout << "had nearly given up a life-long quest to find\n";
+	cout << " had nearly given up a life-long quest to find\n";
 	cout << "The Lost City of ";
 	cout << noun;
-	cout << "when one day. The ";
+	cout << " when one day. The ";
 	cout << noun;
 	cout << " found the explorer. \n";
 	cout << "Surrounded by ";
 	cout << number;
 	cout << " " << noun;
-	cout << ". a tear came to ";
+	cout << ", a tear came to ";
 	cout << name << "'s ";
 	cout << bodyPart << ". \n";
 	cout << "After all this time, the quest was finally over. ";
