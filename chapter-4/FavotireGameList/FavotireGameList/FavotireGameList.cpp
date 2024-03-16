@@ -1,9 +1,4 @@
-﻿#include <iostream>
-#include <string>
-#include <algorithm>
-#include <vector>
-
-using namespace std;
+﻿#include "favgamelist.h"
 
 /* Псевдокод
 
@@ -70,8 +65,6 @@ using namespace std;
 				Вывести сообщение об ошибке
 				Очистить поток ввода
 */
-
-enum actions { WATCH = 1, ADD, DELETE, DELETE_ALL, HELP, QUIT };
 
 void print_help()
 {
@@ -152,65 +145,6 @@ void delete_all_games(vector<string>& gameList)
 	{
 		gameList.clear();
 		cout << "\nВсе игры были успешно удалены!" << endl;
-	}
-}
-
-int main()
-{
-	setlocale(0, "Russian");
-	vector<string>gameList;
-	int user_input;
-	cout << "Добро пожаловать в нашу программу по спику ваших любимых игр" << endl;
-
-	cout << "\nЧто бы вы хотели сделать?" << endl;
-	cout << "Выберите " << WATCH << ", чтобы посмотреть список текущих игр" << endl;
-	cout << "Выберите " << ADD << ", чтобы добавить игру" << endl;
-	cout << "Выберите " << DELETE << ", чтобы удалить игру" << endl;
-	cout << "Выберите " << DELETE_ALL << ", чтобы удалить все игры" << endl;
-	cout << "Выберите " << HELP << ", чтобы получить помощь" << endl;
-	cout << "Если хотите выйти из программы - введите " << QUIT << endl;
-
-	while (true)
-	{
-		cout << "\nВаш выбор: ";
-		cin >> user_input;
-
-		switch (user_input)
-		{
-		case WATCH:
-			print_game_list(gameList);
-			break;
-
-		case ADD:
-			add_game(gameList);
-			break;
-
-		case DELETE:
-			delete_game(gameList);
-			break;
-
-		case DELETE_ALL:
-			delete_all_games(gameList);
-			break;
-
-		case HELP:
-			print_help();
-			break;
-
-		case QUIT:
-			cout << "\nСпасибо, что воспользовались нашей программой!" << endl;
-			return 0;
-
-		default:
-			//isdigit проверяет, является ли данный символ числом от 0 до 9
-			if (cin.fail() || !isdigit(user_input))
-			{
-				cout << "\nНеверный ввод, попробуйте ещё раз" << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			}
-			break;
-		}
 	}
 }
 
