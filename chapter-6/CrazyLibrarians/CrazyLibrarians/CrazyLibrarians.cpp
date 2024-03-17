@@ -1,12 +1,15 @@
 ﻿#include "czlib.h"
 
+istream& input = cin;
+ostream& output = cout;
+
 string askText(const char* prompt)
 {
 	string text;
 	while (true)
 	{
-		cout << prompt;
-		cin >> text;
+		output << prompt;
+		input >> text;
 		bool isValid = true;
 		for (char c : text) 
 		{
@@ -21,9 +24,9 @@ string askText(const char* prompt)
 		{
 			break;
 		}
-		cout << "The entered value is not a letter. Please try again.\n";
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		output << "The entered value is not a letter. Please try again.\n";
+		input.clear();
+		input.ignore(numeric_limits<streamsize>::max(), '\n');
 	} 
 	return text;
 }
@@ -33,16 +36,16 @@ int askNumber(const char* prompt)
 	int num;
 	while(true) 
 	{
-		cout << prompt;
-		cin >> num;
-		if (!cin.fail())
+		output << prompt;
+		input >> num;
+		if (!input.fail())
 		{
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			input.ignore(numeric_limits<streamsize>::max(), '\n');
 			break;
 		}
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "The entered value is not a number. Please try again.\n";
+		input.clear();
+		input.ignore(numeric_limits<streamsize>::max(), '\n');
+		output << "The entered value is not a number. Please try again.\n";
 		
 	} 
 	return num;
@@ -51,27 +54,27 @@ int askNumber(const char* prompt)
 
 void tellStory(string& name, string& noun, int number, string& bodyPart, string& verb)
 {
-	cout << "\nHere's your story:\n\n";
-	cout << "The famous explorer ";
-	cout << name;
-	cout << " had nearly given up a life-long quest to find\n";
-	cout << "The Lost City of ";
-	cout << noun;
-	cout << " when one day. The ";
-	cout << noun;
-	cout << " found the explorer. \n";
-	cout << "Surrounded by ";
-	cout << number;
-	cout << " " << noun;
-	cout << ", a tear came to ";
-	cout << name << "'s ";
-	cout << bodyPart << ". \n";
-	cout << "After all this time, the quest was finally over. ";
-	cout << "And then, the ";
-	cout << noun << "\n";
-	cout << "promptly devoured ";
-	cout << name << ". ";
-	cout << "The moral of the story? Be careful what you ";
-	cout << verb;
-	cout << " for. ";
+	output << "\nHere's your story:\n\n";
+	output << "The famous explorer ";
+	output << name;
+	output << " had nearly given up a life-long quest to find\n";
+	output << "The Lost City of ";
+	output << noun;
+	output << " when one day. The ";
+	output << noun;
+	output << " found the explorer. \n";
+	output << "Surrounded by ";
+	output << number;
+	output << " " << noun;
+	output << ", a tear came to ";
+	output << name << "'s ";
+	output << bodyPart << ". \n";
+	output << "After all this time, the quest was finally over. ";
+	output << "And then, the ";
+	output << noun << "\n";
+	output << "promptly devoured ";
+	output << name << ". ";
+	output << "The moral of the story? Be careful what you ";
+	output << verb;
+	output << " for. ";
 }
