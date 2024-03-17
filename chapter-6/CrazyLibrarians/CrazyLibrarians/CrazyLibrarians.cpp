@@ -1,12 +1,12 @@
 ﻿#include "czlib.h"
 
-string askText(const char* prompt)
+string askText(const char* prompt, istream& input /* = cin */ , ostream& output /* = cout */)
 {
 	string text;
 	while (true)
 	{
-		cout << prompt;
-		cin >> text;
+		output << prompt;
+		input >> text;
 		bool isValid = true;
 		for (char c : text) 
 		{
@@ -21,9 +21,9 @@ string askText(const char* prompt)
 		{
 			break;
 		}
-		cout << "The entered value is not a letter. Please try again.\n";
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		output << "The entered value is not a letter. Please try again.\n";
+		input.clear();
+		input.ignore(numeric_limits<streamsize>::max(), '\n');
 	} 
 	return text;
 }
