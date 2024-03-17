@@ -76,6 +76,14 @@ void print_help()
 	cout << QUIT << " - Выйти из программы\n";
 }
 
+string ask_user_game(string prompt)
+{
+	string game;
+	cout << prompt << " ";
+	cin >> game;
+	return game;
+}
+
 void print_game_list(vector<string>gameList)
 {
 	vector<string>::iterator watchGames;
@@ -93,6 +101,20 @@ void print_game_list(vector<string>gameList)
 	}
 }
 
+/*
+	add_game(vector<string>& gameList)
+	{
+		string game = ask_user_game("Какую игру вы хотите добавить?");
+		if(game_listed(gameList, game))
+		{
+			cout << "Game already exists"
+			return;
+		}
+		real_add_game(gameList, game)
+	}
+
+
+*/
 void add_game(vector<string>& gameList)
 {
 	string user_game_input;
@@ -109,6 +131,21 @@ void add_game(vector<string>& gameList)
 		cout << "\nИгра была успешно добавлена!" << endl;
 	}
 }
+
+
+/*
+	delete_game(vector<string>& gameList)
+	{
+		string game = ask_user_game("Какую игру вы хотите удалить?");		
+		if(!game_listed(gameList, game))
+		{
+			cout << "Game does not exist"
+			return;
+		}
+		real_delete_game(gameList, game)
+	}
+
+*/
 
 void delete_game(vector<string>& gameList)
 {
