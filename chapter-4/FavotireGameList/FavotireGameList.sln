@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FavotireGameList", "FavotireGameList\FavotireGameList.vcxproj", "{2EF04AAA-A7C0-4765-A88A-465E9C46A51A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTests", "UnitTests\UnitTests.vcxproj", "{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2EF04AAA-A7C0-4765-A88A-465E9C46A51A} = {2EF04AAA-A7C0-4765-A88A-465E9C46A51A}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +26,14 @@ Global
 		{2EF04AAA-A7C0-4765-A88A-465E9C46A51A}.Release|x64.Build.0 = Release|x64
 		{2EF04AAA-A7C0-4765-A88A-465E9C46A51A}.Release|x86.ActiveCfg = Release|Win32
 		{2EF04AAA-A7C0-4765-A88A-465E9C46A51A}.Release|x86.Build.0 = Release|Win32
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Debug|x64.ActiveCfg = Debug|x64
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Debug|x64.Build.0 = Debug|x64
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Debug|x86.ActiveCfg = Debug|Win32
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Debug|x86.Build.0 = Debug|Win32
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Release|x64.ActiveCfg = Release|x64
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Release|x64.Build.0 = Release|x64
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Release|x86.ActiveCfg = Release|Win32
+		{6A22C2DD-141F-4C04-BB18-9CF2511DC2FD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
