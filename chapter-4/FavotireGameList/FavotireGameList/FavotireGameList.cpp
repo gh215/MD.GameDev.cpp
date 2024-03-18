@@ -76,11 +76,11 @@ void print_help()
 	cout << QUIT << " - Выйти из программы\n";
 }
 
-string ask_user_game(string prompt)
+string ask_user_game(string prompt, istream& input, ostream& output)
 {
 	string game;
-	cout << prompt << " ";
-	cin >> game;
+	output << prompt << " ";
+	input >> game;
 	return game;
 }
 
@@ -89,19 +89,25 @@ bool game_listed(vector<string>& gameList, string& game)
 	return find(gameList.begin(), gameList.end(), game) != gameList.end();
 }
 
-void real_add_game(vector<string>& gameList, string& game) 
+void real_add_game(vector<string>& gameList, string& game, ostream& output)
 {
 	gameList.push_back(game);
-	cout << "\nИгра была успешно добавлена!" << endl;
+	output << "\nИгра была успешно добавлена!" << endl;
 }
 
-void real_delete_game(vector<string>& gameList, string& game)
+void real_delete_game(vector<string>& gameList, string& game, ostream& output)
 {
 	gameList.clear();
-	cout << "\nИгра была успешно удалена!" << endl;
+	output << "\nИгра была успешно удалена!" << endl;
 }
 
-void add_game(vector<string>& gameList)
+void delete_all_games(vector<string>& gameList, ostream& output)
+{
+	gameList.clear();
+	output << "\nВсе игры были успешно удалены!" << endl;
+}
+
+void add_game(vector<string>& gameList, istream& input, ostream& output)
 {
 	string game = ask_user_game("Какую игру вы хотите добавить?");
 	if (game_listed(gameList, game))
@@ -112,51 +118,28 @@ void add_game(vector<string>& gameList)
 	real_add_game(gameList, game);
 }
 
-void delete_game(vector<string>& gameList)
+void delete_game(vector<string>& gameList, ostream& output)
 {
 	string game = ask_user_game("Какую игру вы хотите удалить?");
 	if (!game_listed(gameList, game))
 	{
-		cout << "\nИзвините, но в вашей библиотеке нет такой игры";
+		output << "\nИзвините, но в вашей библиотеке нет такой игры";
 			return;
 	}
 	real_delete_game(gameList, game);
 }
 
-void delete_all_games(vector<string>& gameList)
-{
-	gameList.clear();
-	cout << "\nВсе игры были успешно удалены!" << endl;
-}
-
-void print_game_list(vector<string>& gameList)
+void print_game_list(vector<string>& gameList, ostream& output)
 {
 	if (gameList.empty())
 	{
-		cout << "Извините, но в вашей библиотеке нет игр";
+		output << "Извините, но в вашей библиотеке нет игр";
 		return;
 	}
-	cout << "\nНа данный момент у вас " << gameList.size() << " игр и среди них: \n";
+	output << "\nНа данный момент у вас " << gameList.size() << " игр и среди них: \n";
 	for (const auto& game : gameList)
 	{
-		cout << " " << game << endl;
-	}
-}
-
-void print_game_list(vector<string>gameList)
-{
-	vector<string>::iterator watchGames;
-	if (gameList.empty())
-	{
-		cout << "\nИзвините, но в вашей библиотеке нет игр" << endl;
-	}
-	else
-	{
-		cout << "\nНа данный момент у вас " << gameList.size() << " игр и среди них: \n";
-		for (watchGames = gameList.begin(); watchGames != gameList.end(); ++watchGames)
-		{
-			cout << " " << *watchGames << endl;
-		}
+		output << " " << game << endl;
 	}
 }
 
