@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{2a93a38c-6aea-4ca1-9402-7b6d90225399}</ProjectGuid>
-    <RootNamespace>GuessTheNumberV2</RootNamespace>
+    <ProjectGuid>{77c98b24-3b8a-4f93-8b40-ad9249f5a070}</ProjectGuid>
+    <RootNamespace>ArgsProg</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -91,7 +91,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,11 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="funcs.cpp" />
-    <ClCompile Include="GuessTheNumberV2.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="gtn.h" />
+    <ClCompile Include="ArgsProg.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
