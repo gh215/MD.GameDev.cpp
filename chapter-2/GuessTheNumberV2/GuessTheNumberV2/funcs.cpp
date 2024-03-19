@@ -17,9 +17,9 @@ int num_gen(int min, int max)
 	return cn;
 }
 
-int ask_user(int cn, int min, int max)
+int ask_user(int cn, int min, int max, istream& input, ostream& output)
 {
-	cout << "\nКомпьютер загадал такое число: "
+	output << "\nКомпьютер загадал такое число: "
 		<< cn
 		<< ". Оно больше, меньше или равно загаданному числу?"
 		<< endl;
@@ -27,35 +27,35 @@ int ask_user(int cn, int min, int max)
 	while (true)
 	{
 
-		cout << "Ваш ответ: ";
+		output << "Ваш ответ: ";
 		int uc;
-		cin >> uc;
+		input >> uc;
 
 		if (uc != SMALL && uc != BIG && uc != CORRECT)
 		{
-			cout << "Введите " << SMALL << ", "
+			output << "Введите " << SMALL << ", "
 				<< BIG << " или " << CORRECT << endl;
 			continue;
 		}
 
 		if (cn == border_max && uc == SMALL)
 		{
-			cout << "Число не может быть больше " << border_max << endl;
+			output << "Число не может быть больше " << border_max << endl;
 			continue;
 		}
 		if (cn == border_min && uc == BIG)
 		{
-			cout << "Число не может быть меньше " << border_min << endl;
+			output << "Число не может быть меньше " << border_min << endl;
 			continue;
 		}
 		if (cn == max && uc == SMALL)
 		{
-			cout << "Число не может быть больше " << max << endl;
+			output << "Число не может быть больше " << max << endl;
 			continue;
 		}
 		if (cn == min && uc == BIG)
 		{
-			cout << "Число не может быть меньше " << min << endl;
+			output << "Число не может быть меньше " << min << endl;
 			continue;
 		}
 

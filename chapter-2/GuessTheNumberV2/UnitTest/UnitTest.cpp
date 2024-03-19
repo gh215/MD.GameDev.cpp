@@ -36,6 +36,49 @@ namespace UnitTest
 			Assert::AreEqual(51, min);
 			Assert::AreEqual(100, max);
 		}
+		TEST_METHOD(AskUserCorrectInput)
+		{
+			int min = 1, max = 10;
+			int cn = 5;
+			istringstream in("2\n");
+			ostringstream out;
+			int result = ask_user(cn, min, max, in, out);
+
+			Assert::AreEqual(to_string(BIG), to_string(result));
+		}
+		TEST_METHOD(AskUserIncorrectInput)
+		{
+			int min = 1, max = 10;
+			int cn = 5;
+			istringstream in("4\n2\n");
+			ostringstream out;
+
+			int result = ask_user(cn, min, max, in, out);
+
+			Assert::AreEqual(to_string(BIG), to_string(result));
+		}
+		TEST_METHOD(AskUserMaxBorder)
+		{
+			int min = 1, max = 10;
+			int cn = 10;
+			istringstream in("3");
+			ostringstream out;
+
+			int result = ask_user(cn, min, max, in, out);
+
+			Assert::AreEqual(to_string(CORRECT), to_string(result));
+		}		
+		TEST_METHOD(AskUserMinBorder)
+		{
+			int min = 1, max = 10;
+			int cn = 1;
+			istringstream in("3");
+			ostringstream out;
+
+			int result = ask_user(cn, min, max, in, out);
+
+			Assert::AreEqual(to_string(CORRECT), to_string(result));
+		}
 
 	};
 }
