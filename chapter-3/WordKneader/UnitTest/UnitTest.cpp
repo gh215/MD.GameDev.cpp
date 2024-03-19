@@ -1,7 +1,6 @@
 ﻿#include "pch.h"
 #include "CppUnitTest.h"
 #include "..\WordKneader\WordKneader.h"
-#include <algorithm>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

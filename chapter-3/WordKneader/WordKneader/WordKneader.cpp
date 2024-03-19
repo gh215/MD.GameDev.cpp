@@ -6,44 +6,43 @@
     4. Если не угадал - его спрашивают до тех пор, пока он не нажал quit
     */
 
-
-int main()
+string permute(string jumble)
 {
-    setlocale(0, "Russian");
+    int length = jumble.size();
 
-    enum fields { WORD, HINT, NUM_FIELDS };
-    const int NUM_WORDS = 5;
-    const string WORDS[NUM_WORDS][NUM_FIELDS] =
+    for (int i = 0; i < length; ++i)
     {
-         {"wall", "Чувствуешь ли ты, что бьёшься головой о что-то?"},
-         {"glasses", "Это поможет вам увидеть ответ на вопрос."},
-         {"labored", "Слишком медленно, не так ли?"},
-         {"persistent", "Продолжайте в том же духе!"},
-         {"jumble", "В этом и заключается смысл игры."}
-    };
+        int index1 = (rand() % length);
+        int index2 = (rand() % length);
+        char temp = jumble[index1];
+        jumble[index1] = jumble[index2];
+        jumble[index2] = temp;
+    }
+    return jumble;
+}
 
-    srand(static_cast<unsigned int>(time(0)));
-    int choice = (rand() % NUM_WORDS);
-    string theWord = WORDS[choice][WORD];
-    string theHint = WORDS[choice][HINT];
-    int score = 0;
-    string jumble = theWord;
 
-    jumble = permute(jumble);
-    const int scoreHint = 3;
-    int score_used_hint = 0;
-    bool usedHint = false;
-
+void intro(string jumble, int score)
+{
     cout << "\t\t Добро пожаловть в игру 'Словомеска'!\n\n";
     cout << "Соберите буквы, чтобы отгадать слово\n";
     cout << "Введите слово 'hint', чтобы дать подсказку\n";
     cout << "Введите слово 'quit', для выходя из игры\n";
     cout << "Ваш текущий результат очков = " << score << endl;
     cout << "Перемешанное слово - это " << jumble;
+}
+
+string get_user_answer()
+{
     string guess;
     cout << "\n\nВаш ответ: ";
     cin >> guess;
+    return guess;
+}
 
+int get_user_guess(string& theWord, string& theHint, bool& usedHint, int& score_used_hint, int& score)
+{
+    string guess = get_user_answer();
     while ((guess != theWord) && (guess != "quit"))
     {
         if (guess == "hint")
@@ -63,7 +62,7 @@ int main()
 
     if (guess == theWord)
     {
-        
+
         cout << "Да, всё верно!";
         int score = theWord.length();
         if (usedHint)
@@ -71,9 +70,7 @@ int main()
             score -= scoreHint;
         }
         cout << "Ваш текущий результат очков = " << score << endl;
+        return score;
     }
-
-    cout << "Спасибо за игру! Ждём Вас снова!";
-
     return 0;
 }
