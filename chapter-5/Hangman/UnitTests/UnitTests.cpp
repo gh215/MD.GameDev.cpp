@@ -45,5 +45,30 @@ namespace UnitTests
             string updSoFar = get_upd_SoFar(word, soFar, guess);
             Assert::AreEqual(static_cast<const char*>("--LL-"), updSoFar.c_str());
         }
+        TEST_METHOD(TestGetUserVar_ValidInput)
+        {
+            istringstream input("A");
+            ostringstream output;
+            string used = "";
+            char guess = get_user_var(used, input, output);
+            Assert::AreEqual('A', guess);
+           
+        }
+        TEST_METHOD(TestGetUserVar_UsedInput)
+        {
+            istringstream input("A\nB");
+            ostringstream output;
+            string used = "A";
+            char guess = get_user_var(used, input, output);
+            Assert::AreEqual('B', guess);
+        }
+        TEST_METHOD(TestGetUserVar_InvalidInputLowercase)
+        {
+            istringstream input("a");
+            ostringstream output;
+            string used = "";
+            char guess = get_user_var(used, input, output);
+            Assert::AreEqual('A', guess);        
+        }
 	};
 }

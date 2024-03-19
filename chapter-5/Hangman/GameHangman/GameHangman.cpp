@@ -91,25 +91,25 @@ string get_init_soFar(string word)
 	return string(word.size(), '-');
 }
 
-void display_game_stat(string soFar, string used, int wrong)
+void display_game_stat(string soFar, string used, int wrong, ostream& output)
 {
-	cout << "\nУ вас осталось " << (МАХ_WRONG - wrong) << " попыток";
-	cout << "\nВы использовали следующие буквы: " << used;
-	cout << "\nСлово: " << soFar << endl;
+	output << "\nУ вас осталось " << (МАХ_WRONG - wrong) << " попыток";
+	output << "\nВы использовали следующие буквы: " << used;
+	output << "\nСлово: " << soFar << endl;
 }
 
-char get_user_var(string used)
+char get_user_var(string used, istream& input, ostream& output)
 {
 	char guess;
-	cout << "\nВаш выбор: ";
-	cin >> guess;
+	output << "\nВаш выбор: ";
+	input >> guess;
 	guess = toupper(guess);
 
 	while (used.find(guess) != string::npos)
 	{
-		cout << "\nВы уже использовали " << guess << endl;
-		cout << "\nВаш выбор: ";
-		cin >> guess;
+		output << "\nВы уже использовали " << guess << endl;
+		output << "\nВаш выбор: ";
+		input >> guess;
 		guess = toupper(guess);
 	}
 	return guess;
@@ -128,7 +128,7 @@ string get_upd_SoFar(string word, string soFar, char guess)
 	return newSoFar;
 }
 
-void game_start(string word)
+void game_start(string word, ostream& output)
 {
 	string soFar = get_init_soFar(word);
 	string used = "";
@@ -140,23 +140,24 @@ void game_start(string word)
 		char guess = get_user_var(used);
 		used += guess;
 
-		if (word.find(guess) != string::npos) {
-			cout << "\nЭто так! " << guess << " - это правильная буква.";
+		if (word.find(guess) != string::npos) 
+		{
+			output << "\nЭто так! " << guess << " - это правильная буква.";
 			soFar = get_upd_SoFar(word, soFar, guess);
 		}
 		else
 		{
-			cout << "\nИзвините, " << guess << " это неправильная буква.";
+			output << "\nИзвините, " << guess << " это неправильная буква.";
 			++wrongCount;
 		}
 	}
 
 	if (wrongCount == МАХ_WRONG) {
-		cout << "\nВас повесили!" << endl;
+		output << "\nВас повесили!" << endl;
 	}
 	else {
-		cout << "\nВы угадали!" << endl;
+		output << "\nВы угадали!" << endl;
 	}
 
-	cout << "Слово, которое было загадано: " << word << endl;
+	output << "Слово, которое было загадано: " << word << endl;
 }
