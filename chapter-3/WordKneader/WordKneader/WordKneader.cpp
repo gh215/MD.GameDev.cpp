@@ -1,10 +1,4 @@
 ﻿#include "WordKneader.h"
-/* Тест-кейсы
-    1. Если пользователь угадал слово без подсказок - он получает количество очков, равное длине слова
-    2. Если пользователь угадал слово с одной подсказкой - количество, равное длине слова минус 3
-    3. Если угадал с несколькими подсказками - также количество, равное длине слова минус 3
-    4. Если не угадал - его спрашивают до тех пор, пока он не нажал quit
-    */
 
 string permute(string jumble)
 {
@@ -32,44 +26,44 @@ void intro(string jumble, int score)
     cout << "Перемешанное слово - это " << jumble;
 }
 
-string get_user_answer()
+string get_user_answer(istream& input, ostream& output)
 {
     string guess;
-    cout << "\n\nВаш ответ: ";
-    cin >> guess;
+    output << "\n\nВаш ответ: ";
+    input >> guess;
     return guess;
 }
 
-int get_user_guess(string& theWord, string& theHint, bool& usedHint, int& score_used_hint, int& score)
+int get_user_guess(string& theWord, string& theHint, bool& usedHint, int& score_used_hint, int& score, istream& input, ostream& output)
 {
-    string guess = get_user_answer();
+    string guess = get_user_answer(input, output);
     while ((guess != theWord) && (guess != "quit"))
     {
         if (guess == "hint")
         {
-            cout << theHint;
+            output << theHint;
             usedHint = true;
             score_used_hint = score - scoreHint;
-            cout << "\nВы воспользовались подсказкой. Ваш текущий результат очков = " << score_used_hint << endl;
+            output << "\nВы воспользовались подсказкой. Ваш текущий результат очков = " << score_used_hint << endl;
         }
         else
         {
-            cout << "Нет, это неправильный ответ. Попробуйте ещё раз";
+            output << "Нет, это неправильный ответ. Попробуйте ещё раз";
         }
-        cout << "\nВаш ответ: ";
-        cin >> guess;
+        output << "\nВаш ответ: ";
+        input >> guess;
     }
 
     if (guess == theWord)
     {
 
-        cout << "Да, всё верно!";
+        output << "Да, всё верно!";
         int score = theWord.length();
         if (usedHint)
         {
             score -= scoreHint;
         }
-        cout << "Ваш текущий результат очков = " << score << endl;
+        output << "Ваш текущий результат очков = " << score << endl;
         return score;
     }
     return 0;
