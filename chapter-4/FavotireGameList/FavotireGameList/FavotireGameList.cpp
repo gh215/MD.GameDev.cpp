@@ -97,36 +97,40 @@ void real_add_game(vector<string>& gameList, string& game, ostream& output)
 
 void real_delete_game(vector<string>& gameList, string& game, ostream& output)
 {
-	gameList.clear();
-	output << "\nИгра была успешно удалена!" << endl;
+	auto iter = find(gameList.begin(), gameList.end(), game);
+	if (iter != gameList.end()) 
+	{
+		gameList.erase(iter);
+		output << "Игра '" << game << "' была успешно удалена!" << endl;
+	}
 }
 
-void delete_all_games(vector<string>& gameList, ostream& output)
+void delete_all_games(vector<string>& gameList)
 {
 	gameList.clear();
-	output << "\nВсе игры были успешно удалены!" << endl;
+	cout << "\nВсе игры были успешно удалены!" << endl;
 }
 
 void add_game(vector<string>& gameList, istream& input, ostream& output)
 {
-	string game = ask_user_game("Какую игру вы хотите добавить?");
+	string game = ask_user_game("Какую игру вы хотите добавить?", input, output);
 	if (game_listed(gameList, game))
 	{
-		cout << "\nТакая игра уже существует!";
+		output << "\nТакая игра уже существует!";
 			return;
 	}
-	real_add_game(gameList, game);
+	real_add_game(gameList, game, output);
 }
 
-void delete_game(vector<string>& gameList, ostream& output)
+void delete_game(vector<string>& gameList, istream& input, ostream& output)
 {
-	string game = ask_user_game("Какую игру вы хотите удалить?");
+	string game = ask_user_game("Какую игру вы хотите удалить?", input, output);
 	if (!game_listed(gameList, game))
 	{
 		output << "\nИзвините, но в вашей библиотеке нет такой игры";
 			return;
 	}
-	real_delete_game(gameList, game);
+	real_delete_game(gameList, game, output);
 }
 
 void print_game_list(vector<string>& gameList, ostream& output)
