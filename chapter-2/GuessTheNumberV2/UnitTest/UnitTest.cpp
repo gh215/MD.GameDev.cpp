@@ -40,44 +40,41 @@ namespace UnitTest
 		{
 			int min = 1, max = 10;
 			int cn = 5;
-			istringstream in("2\n");
+			istringstream in(to_string(BIG));
 			ostringstream out;
 			int result = ask_user(cn, min, max, in, out);
 
-			Assert::AreEqual(to_string(BIG), to_string(result));
+			Assert::IsTrue(BIG == result);
+
+			istringstream in2(to_string(SMALL));
+			ostringstream out2;
+			result = ask_user(cn, min, max, in2, out2);
+
+			Assert::IsTrue(SMALL == result);
+
+			istringstream in3(to_string(CORRECT));
+			ostringstream out3;
+
+			result = ask_user(cn, min, max, in3, out3);
+
+			Assert::IsTrue(CORRECT == result);
+
 		}
 		TEST_METHOD(AskUserIncorrectInput)
 		{
 			int min = 1, max = 10;
 			int cn = 5;
-			istringstream in("4\n2\n");
+			istringstream in("4\n" + to_string(BIG));
 			ostringstream out;
-
 			int result = ask_user(cn, min, max, in, out);
 
-			Assert::AreEqual(to_string(BIG), to_string(result));
-		}
-		TEST_METHOD(AskUserMaxBorder)
-		{
-			int min = 1, max = 10;
-			int cn = 10;
-			istringstream in("3");
-			ostringstream out;
+			Assert::IsTrue(BIG == result);
 
-			int result = ask_user(cn, min, max, in, out);
+			istringstream in2("4\n" + to_string(SMALL));
+			ostringstream out2;
+			result = ask_user(cn, min, max, in2, out2);
 
-			Assert::AreEqual(to_string(CORRECT), to_string(result));
-		}		
-		TEST_METHOD(AskUserMinBorder)
-		{
-			int min = 1, max = 10;
-			int cn = 1;
-			istringstream in("3");
-			ostringstream out;
-
-			int result = ask_user(cn, min, max, in, out);
-
-			Assert::AreEqual(to_string(CORRECT), to_string(result));
+			Assert::IsTrue(SMALL == result);
 		}
 
 	};
