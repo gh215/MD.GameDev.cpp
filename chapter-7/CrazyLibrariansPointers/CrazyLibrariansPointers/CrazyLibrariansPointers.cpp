@@ -53,25 +53,25 @@ void tellStory(const string* name, const string* noun, int number, const string*
 {
 	cout << "\nHere's your story:\n\n";
 	cout << "The famous explorer ";
-	cout << name;
+	cout << *name;
 	cout << " had nearly given up a life-long quest to find\n";
 	cout << "The Lost City of ";
-	cout << noun;
+	cout << *noun;
 	cout << " when one day. The ";
-	cout << noun;
+	cout << *noun;
 	cout << " found the explorer. \n";
 	cout << "Surrounded by ";
 	cout << number;
-	cout << " " << noun;
+	cout << " " << *noun;
 	cout << ", a tear came to ";
-	cout << name << "'s ";
-	cout << bodyPart << ". \n";
+	cout << *name << "'s ";
+	cout << *bodyPart << ". \n";
 	cout << "After all this time, the quest was finally over. ";
 	cout << "And then, the ";
-	cout << noun << "\n";
+	cout << *noun << "\n";
 	cout << "promptly devoured ";
-	cout << name << ". ";
+	cout << *name << ". ";
 	cout << "The moral of the story? Be careful what you ";
-	cout << verb;
+	cout << *verb;
 	cout << " for. ";
 }
