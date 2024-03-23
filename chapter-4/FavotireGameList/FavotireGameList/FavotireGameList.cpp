@@ -89,48 +89,53 @@ bool game_listed(vector<string>& gameList, string& game)
 	return find(gameList.begin(), gameList.end(), game) != gameList.end();
 }
 
-void real_add_game(vector<string>& gameList, string& game, ostream& output)
+bool real_add_game(vector<string>& gameList, string& game)
 {
+	if (game_listed(gameList, game))
+	{
+		return false;
+	}
 	gameList.push_back(game);
-	output << "\nИгра была успешно добавлена!" << endl;
+	return true;
 }
 
-void real_delete_game(vector<string>& gameList, string& game, ostream& output)
+bool real_delete_game(vector<string>& gameList, string& game)
 {
 	auto iter = find(gameList.begin(), gameList.end(), game);
-	if (iter != gameList.end()) 
+	if (iter == gameList.end())
 	{
-		gameList.erase(iter);
-		output << "Игра '" << game << "' была успешно удалена!" << endl;
+		return false;
 	}
+	gameList.erase(iter);
+	return true;
 }
 
 void delete_all_games(vector<string>& gameList)
 {
 	gameList.clear();
-	cout << "\nВсе игры были успешно удалены!" << endl;
 }
 
 void add_game(vector<string>& gameList, istream& input, ostream& output)
 {
 	string game = ask_user_game("Какую игру вы хотите добавить?", input, output);
-	if (game_listed(gameList, game))
+
+	if (real_add_game(gameList, game))
 	{
-		output << "\nТакая игра уже существует!";
-			return;
+		output << "\nИгра была успешно добавлена!" << endl;
+		return;
 	}
-	real_add_game(gameList, game, output);
+	output << "\nТакая игра уже существует!" << endl;
 }
 
 void delete_game(vector<string>& gameList, istream& input, ostream& output)
 {
 	string game = ask_user_game("Какую игру вы хотите удалить?", input, output);
-	if (!game_listed(gameList, game))
+	if (real_delete_game(gameList, game))
 	{
-		output << "\nИзвините, но в вашей библиотеке нет такой игры";
-			return;
+		output << "Игра '" << game << "' была успешно удалена!" << endl;
+		return;
 	}
-	real_delete_game(gameList, game, output);
+	output << "\nИзвините, но в вашей библиотеке нет такой игры";
 }
 
 void print_game_list(vector<string>& gameList, ostream& output)

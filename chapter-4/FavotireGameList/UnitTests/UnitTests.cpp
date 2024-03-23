@@ -18,22 +18,26 @@ namespace UnitTests
 			add_game(gameList, input, output);
 
 			Assert::AreEqual(static_cast<size_t>(1), gameList.size());
-			Assert::AreEqual(std::string("Dota"), gameList[0]);
+			Assert::AreEqual(string("Dota"), gameList[0]);
 		}
-        TEST_METHOD(TestAddGameExistingGame)
+        TEST_METHOD(TestRealAddGameExistingGame)
         {
-            vector<string> gameList{"Warcraft"};
-            istringstream input("Warcraft");
-            ostringstream output;
+            string game = "Warcraft";
+            vector<string> gameList{game};
+            bool ret = real_add_game(gameList, game);    
 
-            add_game(gameList, input, output);    
-            /*
-            Эта конструкция используется для явного приведения типа числового литерала 2 к типу size_t. 
-            size_t - это беззнаковый целочисленный тип, который обычно используется для представления размеров или индексов
-            */
             Assert::AreEqual(static_cast<size_t>(1), gameList.size());
+            Assert::IsFalse(ret);
         }
+        TEST_METHOD(TestRealAddGameNonExistingGame)
+        {
+            string game = "Warcraft";
+            vector<string> gameList{};
+            bool ret = real_add_game(gameList, game);
 
+            Assert::AreEqual(static_cast<size_t>(1), gameList.size());
+            Assert::IsTrue(ret);
+        }
         TEST_METHOD(TestDeleteGameExistingGame)
         {
             vector<string> gameList{ "Dota", "Warcraft", "Warhammer" };
@@ -45,7 +49,7 @@ namespace UnitTests
             Assert::AreEqual(string("Dota"), gameList[0]);
             Assert::AreEqual(string("Warhammer"), gameList[1]);
         }
-
+        // добавить тест real_delete_game
         TEST_METHOD(TestDeleteGameNonExistingGame)
         {
             vector<string> gameList{ "Dota", "Warcraft" };
@@ -55,7 +59,6 @@ namespace UnitTests
             delete_game(gameList, input, output);           
             Assert::AreEqual(static_cast<size_t>(2), gameList.size());
         }
-
         TEST_METHOD(TestPrintGameListWithGames)
         {
             vector<string> gameList{ "Dota", "Warcraft", "Warhammer" };
@@ -64,7 +67,6 @@ namespace UnitTests
             print_game_list(gameList, output);
             Assert::AreEqual(std::string("\nНа данный момент у вас 3 игр и среди них: \n Dota\n Warcraft\n Warhammer\n"), output.str());
         }
-
         TEST_METHOD(TestPrintGameListWithoutGames)
         {
             vector<string> gameList;

@@ -6,14 +6,8 @@ int main()
 	vector<string>gameList;
 	int user_input;
 	cout << "Добро пожаловать в нашу программу по спику ваших любимых игр" << endl;
-
-	cout << "\nЧто бы вы хотели сделать?" << endl;
-	cout << "Выберите " << WATCH << ", чтобы посмотреть список текущих игр" << endl;
-	cout << "Выберите " << ADD << ", чтобы добавить игру" << endl;
-	cout << "Выберите " << DELETE << ", чтобы удалить игру" << endl;
-	cout << "Выберите " << DELETE_ALL << ", чтобы удалить все игры" << endl;
+	print_help();
 	cout << "Выберите " << HELP << ", чтобы получить помощь" << endl;
-	cout << "Если хотите выйти из программы - введите " << QUIT << endl;
 
 	while (true)
 	{
@@ -36,6 +30,7 @@ int main()
 
 		case DELETE_ALL:
 			delete_all_games(gameList);
+			cout << "\nВсе игры были успешно удалены!" << endl;
 			break;
 
 		case HELP:
