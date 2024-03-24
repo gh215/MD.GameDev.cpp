@@ -38,16 +38,6 @@ int ask_user(int cn, int min, int max, istream& input, ostream& output)
 			continue;
 		}
 
-		if (cn == border_max && uc == SMALL)
-		{
-			output << "Число не может быть больше " << border_max << endl;
-			continue;
-		}
-		if (cn == border_min && uc == BIG)
-		{
-			output << "Число не может быть меньше " << border_min << endl;
-			continue;
-		}
 		if (cn == max && uc == SMALL)
 		{
 			output << "Число не может быть больше " << max << endl;
