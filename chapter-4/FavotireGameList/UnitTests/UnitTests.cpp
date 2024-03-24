@@ -49,7 +49,28 @@ namespace UnitTests
             Assert::AreEqual(string("Dota"), gameList[0]);
             Assert::AreEqual(string("Warhammer"), gameList[1]);
         }
-        // добавить тест real_delete_game
+        TEST_METHOD(TestRealDeleteGameNonExistingGame)
+        {
+            string game = "Warcraft";
+            vector<string> gameList{ "Dota", "Warhammer" };
+            bool ret = real_delete_game(gameList, game);
+
+            Assert::IsFalse(ret);
+            Assert::AreEqual(static_cast<size_t>(2), gameList.size());
+            Assert::AreEqual(string("Dota"), gameList[0]);
+            Assert::AreEqual(string("Warhammer"), gameList[1]);
+        }
+        TEST_METHOD(TestRealDeleteGameExistingGame)
+        {
+            string game = "Warcraft";
+            vector<string> gameList{ "Dota", "Warcraft", "Warhammer" };
+            bool ret = real_delete_game(gameList, game);
+
+            Assert::IsTrue(ret);
+            Assert::AreEqual(static_cast<size_t>(2), gameList.size());
+            Assert::AreEqual(string("Dota"), gameList[0]);
+            Assert::AreEqual(string("Warhammer"), gameList[1]);
+        }
         TEST_METHOD(TestDeleteGameNonExistingGame)
         {
             vector<string> gameList{ "Dota", "Warcraft" };
