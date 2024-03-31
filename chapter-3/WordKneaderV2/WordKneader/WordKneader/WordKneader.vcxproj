@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="permute.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="WordKneader.cpp" />
   </ItemGroup>
   <ItemGroup>

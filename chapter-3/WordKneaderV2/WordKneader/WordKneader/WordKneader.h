@@ -22,10 +22,10 @@ const string WORDS[NUM_WORDS][NUM_FIELDS] =
 };
 
 string permute(string jumble);
-void greetings(string jumble, int score);
+void greetings(string jumble);
 string get_user_answer(istream& in = cin, ostream& out = cout);
-void print_hint(string& theHint, int& score, int& score_used_hint, bool& usedHint, ostream& out = cout);
-void penalty(int& score, int& score_used_hint);
+void print_hint(string theHint, int score, bool& usedHint, ostream& out = cout);
+void penalty(int score, int& score_used_hint);
 void try_again(ostream& out = cout);
-int action(string& theWord, string& theHint, int& score, int& score_used_hint, bool& usedHint, istream& in = cin, ostream& out = cout);
-void farewell(int& score, ostream& out = cout);
+int action(string theWord, string theHint, istream& in = cin, ostream& out = cout);
+void farewell(int score, ostream& out = cout);

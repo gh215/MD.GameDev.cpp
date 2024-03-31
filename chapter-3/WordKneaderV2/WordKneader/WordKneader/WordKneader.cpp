@@ -16,13 +16,12 @@ string permute(string jumble)
 }
 
 
-void greetings(string jumble, int score)
+void greetings(string jumble)
 {
 	cout << "\t\t Добро пожаловть в игру 'Словомеска'!\n\n";
 	cout << "Соберите буквы, чтобы отгадать слово\n";
 	cout << "Введите слово 'hint', чтобы дать подсказку\n";
 	cout << "Введите слово 'quit', для выходя из игры\n";
-	cout << "Ваш текущий результат очков = " << score << endl;
 	cout << "Перемешанное слово - это " << jumble;
 }
 
@@ -34,15 +33,16 @@ string get_user_answer(istream& input, ostream& output)
 	return guess;
 }
 
-void print_hint(string& theHint, int& score, int& score_used_hint, bool& usedHint, ostream& output)
+void print_hint(string theHint, int score, bool& usedHint, ostream& output)
 {
 	output << theHint;
+	int score_used_hint = 0;
 	usedHint = true;
 	penalty(score, score_used_hint);
 	output << "\nВы воспользовались подсказкой. Ваш текущий результат очков = " << score_used_hint << endl;
 }
 
-void penalty(int& score, int& score_used_hint)
+void penalty(int score, int& score_used_hint)
 {
 	score_used_hint = score - scoreHint;
 }
@@ -52,20 +52,22 @@ void try_again(ostream& output)
 	output << "\nУвы, но слово неправильное! Попробуйте ещё раз." << endl;
 }
 
-void farewell(int& score, ostream& output)
+void farewell(int score, ostream& output)
 {
 	output << "Спасибо за игру! Приходите ещё!\n";
 	output << "Ваш текущий результат очков = " << score << endl;
 }
 
-int action(string& theWord, string& theHint, int& score, int& score_used_hint, bool& usedHint, istream& input, ostream& output)
+int action(string theWord, string theHint, istream& input, ostream& output)
 {
+	int score = 0;
+	bool usedHint = false;
 	string guess = get_user_answer(input, output);
 	while (guess != theWord && guess != "quit")
 	{
 		if (guess == "hint")
 		{
-			print_hint(theHint, score, score_used_hint, usedHint, output);
+			print_hint(theHint, score, usedHint, output);
 		}
 		else
 		{
