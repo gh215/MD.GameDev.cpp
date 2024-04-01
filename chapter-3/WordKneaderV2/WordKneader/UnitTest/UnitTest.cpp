@@ -53,7 +53,7 @@ namespace UnitTest
 			int score_used_hint = 0;
 			int score = 0;
 
-			int result = action(theWord, theHint, score, score_used_hint, usedHint, in);
+			int result = action(theWord, theHint, in);
 			
 			Assert::AreEqual(4, result);
 		}
@@ -67,9 +67,9 @@ namespace UnitTest
 			int score_used_hint = 0;
 			int score = 0;
 
-			int result = action(theWord, theHint, score, score_used_hint, usedHint, in);
+			int result = action(theWord, theHint, in);
 
-			Assert::AreEqual(1, result);
+			Assert::AreEqual(4, result);
 		}
 		TEST_METHOD(TestGetUserIncorrectThenCorrect)
 		{
@@ -81,7 +81,7 @@ namespace UnitTest
 			int score_used_hint = 0;
 			int score = 0;
 
-			int result = action(theWord, theHint, score, score_used_hint, usedHint, in);
+			int result = action(theWord, theHint, in);
 
 			Assert::AreEqual(7, result);
 			Assert::IsFalse(usedHint);
@@ -96,7 +96,7 @@ namespace UnitTest
 			int score_used_hint = 0;
 			int score = 0;
 
-			int result = action(theWord, theHint, score, score_used_hint, usedHint, in);
+			int result = action(theWord, theHint, in);
 
 			Assert::AreEqual(0, result);
 		}
