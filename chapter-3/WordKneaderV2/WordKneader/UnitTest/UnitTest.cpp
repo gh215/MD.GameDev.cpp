@@ -46,12 +46,8 @@ namespace UnitTest
 		TEST_METHOD(TestAction_Correct_NoHint)
 		{
 			istringstream in("wall");
-			istringstream out;
 			string theWord = "wall";
 			string theHint = "Чувствуешь ли ты, что бьёшься головой о что-то?";
-			bool usedHint = false;
-			int score_used_hint = 0;
-			int score = 0;
 
 			int result = action(theWord, theHint, in);
 			
@@ -59,42 +55,30 @@ namespace UnitTest
 		}
 		TEST_METHOD(TestGetUserGuess_Correct_Hint)
 		{
-			istringstream in("wall");
-			istringstream out;
+			istringstream in("hint\nwall");
 			string theWord = "wall";
 			string theHint = "Чувствуешь ли ты, что бьёшься головой о что-то?";
-			bool usedHint = true;
-			int score_used_hint = 0;
-			int score = 0;
 
 			int result = action(theWord, theHint, in);
 
-			Assert::AreEqual(4, result);
+			Assert::AreEqual(1, result);
 		}
 		TEST_METHOD(TestGetUserIncorrectThenCorrect)
 		{
 			istringstream in("incorrect\nlabored");
-			istringstream out;
 			string theWord = "labored";
 			string theHint = "Слишком медленно, не так ли?";
-			bool usedHint = false;
-			int score_used_hint = 0;
-			int score = 0;
 
 			int result = action(theWord, theHint, in);
 
 			Assert::AreEqual(7, result);
-			Assert::IsFalse(usedHint);
 		}
 		TEST_METHOD(TestGetUserGuess_QuitGame)
 		{
 			istringstream in("quit");
-			istringstream out;
 			string theWord = "persistent";
 			string theHint = "Продолжайте в том же духе!";
 			bool usedHint = true;
-			int score_used_hint = 0;
-			int score = 0;
 
 			int result = action(theWord, theHint, in);
 
