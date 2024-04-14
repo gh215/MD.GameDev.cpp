@@ -42,14 +42,7 @@ void help(ostream& output)
 
 void player_choice(Critter& crit, istream& input, ostream& output)
 {
-	output << "\nWelcome to the Critter Caretaker! Please, choose one option below.\n\n";
-	output << "0 - Quit\n";
-	output << "1 - Check your critter\n";
-	output << "2 - Feed your critter\n";
-	output << "3 - Play with your critter\n";
-	output << "4 - Wait\n";
-	output << "5 - Check your critter's hunger and boredom\n";
-	output << "6 - Help" << endl;
+	help();
 	int choice;
 	do
 	{
