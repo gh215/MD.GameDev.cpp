@@ -148,22 +148,22 @@ void Critter::ShowHunger(ostream& output)
 	output << "I'm feeling ";
 	if (m_Hunger >= 12) 
 	{
-		output << "extremely hungry. ";
+		output << "extremely hungry.\n";
 	}
 	else if (m_Hunger >= 9) 
 	{
-		output << "very hungry. ";
+		output << "very hungry.\n";
 	}
 	else if (m_Hunger >= 5) 
 	{
-		output << "hungry. ";
+		output << "hungry.\n";
 	}
 	else if (m_Hunger >= 3) 
 	{
-		output << "a bit hungry. ";
+		output << "a bit hungry.\n";
 	}
 	else {
-		output << "not hungry at all. ";
+		output << "not hungry at all.\n";
 	}
 }
 
@@ -171,21 +171,21 @@ void Critter::ShowBoredom(ostream& output)
 {
 	if (m_Boredom >= 12) 
 	{
-		output << "\nI'm extremely bored.\n";
+		output << "I'm extremely bored.\n";
 	}
 	else if (m_Boredom >= 9) 
 	{
-		output << "\nI'm very bored.\n";
+		output << "I'm very bored.\n";
 	}
 	else if (m_Boredom >= 5) 
 	{
-		output << "\nI'm bored.\n";
+		output << "I'm bored.\n";
 	}
 	else if (m_Boredom >= 3) 
 	{
-		output << "\nI'm a bit bored.\n";
+		output << "I'm a bit bored.\n";
 	}
 	else {
-		output << "\nI'm not bored at all.\n";
+		output << "I'm not bored at all.\n";
 	}
 }
